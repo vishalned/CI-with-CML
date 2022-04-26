@@ -46,7 +46,14 @@ y_test = tensorflow.keras.utils.to_categorical(y_test, NUM_CLASSES)
 
 model = create_model()
 
+
+
 history = model.fit(X_train[:5000, :], y_train[:5000, :], BATCH_SIZE, NUM_EPOCHS, validation_data=(X_test, y_test))
+max_train_acc = max(history.history['accuracy'])
+max_val_acc = max(history.history['val_accuracy'])
+with open('results.txt', 'w') as file:
+    file.write(f'max train accuracy : {max_train_acc:.2f} \n')
+    file.write(f'max validation accuracy : {max_val_acc:.2f}\n')
 
 print(history.history.keys())
 plt.plot(history.history['accuracy'])
