@@ -2,4 +2,3 @@ matplotlib
 seaborn
 numpy
 tensorflow
-keras==2.2.4
