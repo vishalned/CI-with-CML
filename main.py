@@ -1,11 +1,11 @@
-import keras
+import tensorflow.keras
 import matplotlib
 import numpy as np
-import keras.losses
-from keras.datasets import mnist
-from keras.models import Sequential
-from keras.layers import Dense, Flatten
-from keras.layers import MaxPooling2D, Conv2D
+import tensorflow.keras.losses
+from tensorflow.keras.datasets import mnist
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.layers import Dense, Flatten
+from tensorflow.keras.layers import MaxPooling2D, Conv2D
 import seaborn as sns
 import matplotlib.pyplot as plt
 sns.set()
@@ -41,8 +41,8 @@ dim = X_train.shape[1]
 
 X_train = (X_train.reshape((n_samples_train, dim, dim, 1)).astype('float32'))/255.
 X_test = (X_test.reshape((n_samples_test, dim, dim, 1)).astype('float32'))/255.
-y_train = keras.utils.to_categorical(y_train, NUM_CLASSES)
-y_test = keras.utils.to_categorical(y_test, NUM_CLASSES)
+y_train = tensorflow.keras.utils.to_categorical(y_train, NUM_CLASSES)
+y_test = tensorflow.keras.utils.to_categorical(y_test, NUM_CLASSES)
 
 model = create_model()
 
