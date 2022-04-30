@@ -1,11 +1,12 @@
-import keras
+
+import tensorflow.keras
 import matplotlib
 import numpy as np
-import keras.losses
-from keras.datasets import mnist
-from keras.models import Sequential
-from keras.layers import Dense, Flatten
-from keras.layers import MaxPooling2D, Conv2D
+import tensorflow.keras.losses
+from tensorflow.keras.datasets import mnist
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.layers import Dense, Flatten
+from tensorflow.keras.layers import MaxPooling2D, Conv2D
 import seaborn as sns
 import matplotlib.pyplot as plt
 sns.set()
@@ -15,7 +16,7 @@ sns.set()
 
 #parameters
 BATCH_SIZE = 128
-NUM_EPOCHS = 2
+NUM_EPOCHS = 5
 NUM_CLASSES = 10
 INPUT_DIM = (28, 28, 1)
 
@@ -41,20 +42,23 @@ dim = X_train.shape[1]
 
 X_train = (X_train.reshape((n_samples_train, dim, dim, 1)).astype('float32'))/255.
 X_test = (X_test.reshape((n_samples_test, dim, dim, 1)).astype('float32'))/255.
-y_train = keras.utils.to_categorical(y_train, NUM_CLASSES)
-y_test = keras.utils.to_categorical(y_test, NUM_CLASSES)
+y_train = tensorflow.keras.utils.to_categorical(y_train, NUM_CLASSES)
+y_test = tensorflow.keras.utils.to_categorical(y_test, NUM_CLASSES)
 
 model = create_model()
 
+
+
 history = model.fit(X_train[:5000, :], y_train[:5000, :], BATCH_SIZE, NUM_EPOCHS, validation_data=(X_test, y_test))
-max_train_acc = max(history.history['acc'])
-max_val_acc = max(history.history['val_acc'])
+max_train_acc = max(history.history['accuracy'])
+max_val_acc = max(history.history['val_accuracy'])
 with open('results.txt', 'w') as file:
     file.write(f'max train accuracy : {max_train_acc:.2f} \n')
     file.write(f'max validation accuracy : {max_val_acc:.2f}\n')
 
-plt.plot(history.history['acc'])
-plt.plot(history.history['val_acc'])
+print(history.history.keys())
+plt.plot(history.history['accuracy'])
+plt.plot(history.history['val_accuracy'])
 plt.title('model accuracy')
 plt.ylabel('accuracy')
 plt.xlabel('epoch')
@@ -70,5 +74,3 @@ plt.xlabel('epoch')
 plt.legend(['train', 'test'], loc='upper left')
 plt.savefig('loss.png')
 plt.close()
-
-
