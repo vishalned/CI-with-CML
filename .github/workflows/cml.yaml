@@ -23,3 +23,14 @@ jobs:
           python main.py
           echo "Model Metrics"
           cat results.txt
+          echo "## Model metrics" > report.md
+          cat results.txt >> report.md
+
+          echo "## Plots" >> report.md
+          echo "### Loss" >> report.md
+          cml-publish loss.png --md >> report.md
+
+          echo "### Accuracy" >> report.md
+          cml-publish acc.png --md >> report.md
+
+          cml-send-comment report.md
