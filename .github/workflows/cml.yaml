@@ -21,3 +21,5 @@ jobs:
           # Your ML workflow goes here
           pip install -r requirement.txt
           python main.py
+          Echo "Model Metrics"
+          cat metrics.txt
