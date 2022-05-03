@@ -22,4 +22,4 @@ jobs:
           pip install -r requirement.txt
           python main.py
           echo "Model Metrics"
-          cat metrics.txt
+          cat results.txt
